@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "nametag-fix",
+  "version": "${version}",
+  "name": "Nametag Render Fix",
+  "description": "Defer nametag rendering to fix translucency issues.",
+  "authors": ["Tektonikal"],
+  "contact": {
+    "discord": "https://discord.gg/HyUVJYeKS5",
+    "sources": "https://github.com/Tektonikal/NametagFix"
+  },
+  "license": "LGPL-3.0",
+  "icon": "evilicon.png",
+  "environment": "client",
+  "mixins": [
+    "nametag-fix.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=1.14"
+  }
+}
