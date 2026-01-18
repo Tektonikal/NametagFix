@@ -10,5 +10,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(EntityRenderer.class)
 public interface Yeah<T extends Entity> {
     @Invoker("renderLabelIfPresent")
-    void yeah(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
+    void yeah(T entity, String string, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light);
 }

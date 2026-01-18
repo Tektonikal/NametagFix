@@ -14,11 +14,11 @@ import tektonikal.evil.nametagFix.client.NametagFixClient;
 public class EntityRendererMixin<T extends Entity> {
 
     @WrapMethod(method = "renderLabelIfPresent")
-    private void yeah(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, Operation<Void> original) {
+    private void yeah(T entity, String string, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, Operation<Void> original) {
         if (!NametagFixClient.isItTheLastWorldRenderStage) {
             NametagFixClient.yeah.add(entity);
         } else {
-            original.call(entity, text, matrices, vertexConsumers, light);
+            original.call(entity, string, matrixStack, vertexConsumerProvider, light);
         }
 
     }
