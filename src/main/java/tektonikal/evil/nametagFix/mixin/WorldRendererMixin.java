@@ -16,8 +16,6 @@ public class WorldRendererMixin {
     // Inject at the END of the renderMain lambda, AFTER everything else including immediate.draw()
     @Inject(method = "method_62214", at = @At("TAIL"))
     private void renderDeferredNametags(CallbackInfo ci, @Local MatrixStack matrixStack, @Local VertexConsumerProvider.Immediate immediate) {
-        System.out.println("[NametagFix] renderDeferredNametags called, deferred count: " + NametagFixClient.deferredLabels.size());
-
         if (NametagFixClient.deferredLabels.isEmpty()) {
             return;
         }
