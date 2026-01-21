@@ -1,7 +1,11 @@
 package tektonikal.evil.nametagFix.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
+import net.minecraft.client.render.command.OrderedRenderCommandQueueImpl;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,8 +23,9 @@ public class WorldRendererMixin {
         if (NametagFixClient.deferredLabels.isEmpty()) {
             return;
         }
-
         NametagFixClient.isItTheLastWorldRenderStage = true;
+
+        MinecraftClient.getInstance().inGameHud.render();
 
         for (NametagFixClient.DeferredLabel label : NametagFixClient.deferredLabels) {
             matrixStack.push();
@@ -29,10 +34,9 @@ public class WorldRendererMixin {
 
             ((Yeah) label.renderer()).yeah(
                     label.state(),
-                    label.text(),
                     matrixStack,
-                    immediate,
-                    label.light()
+                    label.queue(),
+                    label.cameraRenderState()
             );
 
             matrixStack.pop();

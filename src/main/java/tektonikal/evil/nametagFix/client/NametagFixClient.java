@@ -1,7 +1,10 @@
 package tektonikal.evil.nametagFix.client;
 
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.state.CameraRenderState;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.joml.Matrix4f;
 
@@ -15,8 +18,8 @@ public class NametagFixClient {
     public record DeferredLabel(
             EntityRenderer<?, ?> renderer,
             EntityRenderState state,
-            Text text,
-            int light,
+            OrderedRenderCommandQueue queue,
+            CameraRenderState cameraRenderState,
             Matrix4f positionMatrix,
             Matrix4f normalMatrix
     ) {}
