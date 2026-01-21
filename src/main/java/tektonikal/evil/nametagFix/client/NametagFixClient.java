@@ -15,11 +15,6 @@ public class NametagFixClient {
     public static List<DeferredLabel> deferredSeethroughLabels = new ArrayList<>();
     public static List<DeferredLabel> deferredNormalLabels = new ArrayList<>();
 
-    public static boolean renderingDeferred = false;
-
-    /**
-     * Stores the final computed label data, mirroring OrderedRenderCommandQueueImpl.LabelCommand
-     */
     public record DeferredLabel(
             Matrix4f matricesEntry,
             float x,

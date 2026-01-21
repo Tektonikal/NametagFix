@@ -31,11 +31,8 @@ public class LabelCommandRendererMixin {
 
         @WrapMethod(method = "add")
         private void deferLabelAdd(MatrixStack matrices, @Nullable Vec3d pos, int y, Text label, boolean notSneaking, int light, double squaredDistanceToCamera, CameraRenderState cameraState, Operation<Void> original) {
-            // first pass, compute and store the final label data
-            // mirrors the logic in LabelCommandRenderer.Commands.add()
             if (pos != null) {
                 MinecraftClient client = MinecraftClient.getInstance();
-
                 matrices.push();
                 matrices.translate(pos.x, pos.y + 0.5, pos.z);
                 matrices.multiply(cameraState.orientation);
@@ -46,17 +43,10 @@ public class LabelCommandRendererMixin {
                 int backgroundColor = (int) (client.options.getTextBackgroundOpacity(0.25F) * 255.0F) << 24;
 
                 if (notSneaking) {
-                    // not sneaking: add both normal (bright) and see-through labels
-                    NametagFixClient.deferredNormalLabels.add(new NametagFixClient.DeferredLabel(matrix4f, x, y, label, LightmapTextureManager.applyEmission(light, 2), -1, // white color
-                            0,  // no background for normal
-                            squaredDistanceToCamera));
-                    NametagFixClient.deferredSeethroughLabels.add(new NametagFixClient.DeferredLabel(new Matrix4f(matrix4f), // copy matrix since we're storing it twice
-                            x, y, label, light, -2130706433, // semi-transparent white (0x80FFFFFF as int)
-                            backgroundColor, squaredDistanceToCamera));
+                    NametagFixClient.deferredNormalLabels.add(new NametagFixClient.DeferredLabel(matrix4f, x, y, label, LightmapTextureManager.applyEmission(light, 2), -1, 0, squaredDistanceToCamera));
+                    NametagFixClient.deferredSeethroughLabels.add(new NametagFixClient.DeferredLabel(new Matrix4f(matrix4f), x, y, label, light, -2130706433, backgroundColor, squaredDistanceToCamera));
                 } else {
-                    // Sneaking: only add normal label with background
-                    NametagFixClient.deferredNormalLabels.add(new NametagFixClient.DeferredLabel(matrix4f, x, y, label, light, -2130706433, // semi-transparent white
-                            backgroundColor, squaredDistanceToCamera));
+                    NametagFixClient.deferredNormalLabels.add(new NametagFixClient.DeferredLabel(matrix4f, x, y, label, light, -2130706433, backgroundColor, squaredDistanceToCamera));
                 }
 
                 matrices.pop();

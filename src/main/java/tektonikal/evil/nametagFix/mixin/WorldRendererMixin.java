@@ -83,8 +83,7 @@ public abstract class WorldRendererMixin {
                     labelCommand.lightCoords()
             );
         }
-        NametagFixClient.deferredNormalLabels.clear();
-        NametagFixClient.deferredSeethroughLabels.clear();
+        NametagFixClient.clear();
         immediate.draw();
     }
 }
