@@ -2,14 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "tektonikal.evil.nametagFix.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
+  "compatibilityLevel": "JAVA_21",
   "client": [
-    "EntityRendererMixin",
-    "GameRendererMixin",
-    "WorldRendererMixin",
-    "Yeah"
+    "LabelCommandRendererMixin",
+    "LabelCommandRendererMixin$LabelCommandRendererCommandMixin",
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
