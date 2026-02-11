@@ -45,12 +45,8 @@ public abstract class WorldRendererMixin {
     @Final
     private OrderedRenderCommandQueueImpl entityRenderCommandQueue;
 
-
-    @Shadow
-    protected abstract void renderWeather(FrameGraphBuilder frameGraphBuilder, GpuBufferSlice gpuBufferSlice);
-
     @Inject(method = "method_62214", at = @At(value = "TAIL"))
-    private void rightBeforeRenderEnd(GpuBufferSlice gpuBufferSlice, WorldRenderState worldRenderState, Profiler profiler, Matrix4f matrix4f, Handle handle, Handle handle2, boolean bl, Handle handle3, Handle handle4, CallbackInfo ci) {
+    private void rightBeforeRenderEnd(GpuBufferSlice gpuBufferSlice, WorldRenderState worldRenderState, Profiler profiler, Matrix4f matrix4f, Handle handle, Handle handle2, boolean bl, Frustum frustum, Handle handle3, Handle handle4, CallbackInfo ci) {
         var immediate = this.bufferBuilders.getEntityVertexConsumers();
         NametagFixClient.deferredSeethroughLabels.sort(Comparator.comparing(NametagFixClient.DeferredLabel::distanceToCameraSq).reversed());
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
